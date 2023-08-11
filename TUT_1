@@ -1,0 +1,38 @@
+N = 5;
+x = linspace(1,10,N); % check the dimension
+% linspace --> linearspace vector
+% 3 arguments d1 =1 d2 = 10 d3 = N
+y = randi(10,[1,N]);
+% creates random funtions at x values
+
+y = y';
+
+G = zeros(N,N);
+for i = 1 : N
+    for j = 1:N
+        G(i,j) = x(i).^(j-1);
+    end
+end
+
+m = inv(G)*y;
+fprintf('%i\n', m);
+
+xi = linspace(x(1),x(end),1000);
+xi = xi';
+%fprintf('%i\n', xi);
+Gk = zeros(1000,N);
+
+for i = 1 : 1000
+    for j = 1:N
+        Gk(i,j) = xi(i).^(j-1);
+    end
+end
+
+yi = Gk*m;
+
+
+%yi = m(1) + m(2)*xi + m(3)*xi.^2 + m(4)*xi.^3 + m(5)*xi.^4;
+fprintf('%i\n', yi);
+plot(x,y);
+hold on
+plot(xi,yi);
